@@ -1,0 +1,55 @@
+version: '3'
+services:
+  php:
+    tty: true
+    build:
+      context: .
+      dockerfile: ./apache-php/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: Dv7T5ChAac
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: sWiQ9pNQYAac
+      MYSQL_DATABASE: laravel
+    ports:
+      - "80:80"
+#    depends_on:
+#      - mysql
+#    links:
+#      - mysql
+    volumes:
+      - ./laravel/app:/var/www/laravel/app
+      - ./laravel/bootstrap:/var/www/laravel/bootstrap
+      - ./laravel/config:/var/www/laravel/config
+      - ./laravel/database:/var/www/laravel/database
+      - ./laravel/lang:/var/www/laravel/lang
+      - ./laravel/public:/var/www/laravel/public
+      - ./laravel/resources:/var/www/laravel/resources
+      - ./laravel/routes:/var/www/laravel/routes
+      - ./laravel/storage/app:/var/www/laravel/storage/app
+      - ./laravel/storage/framework:/var/www/laravel/storage/framework
+      - ./laravel/tests:/var/www/laravel/tests
+      - ./laravel/vendor:/var/www/laravel/vendor
+      - ./laravel/.editorconfig:/var/www/laravel/.editorconfig
+      - ./laravel/.env:/var/www/laravel/.env
+      - ./laravel/.env.example:/var/www/laravel/.env.example
+      - ./laravel/.gitattributes:/var/www/laravel/.gitattributes
+      - ./laravel/composer.json:/var/www/laravel/composer.json
+      - ./laravel/composer.lock:/var/www/laravel/composer.lock
+      - ./apache-php/conf/httpd.conf:/etc/httpd/conf/httpd.conf
+      - ./apache-php/conf.d/www.conf:/etc/httpd/conf.d/www.conf
+
+# 良く使うので書いたが、一旦mysqlはいらないのでコメントアウト
+#  mysql:
+#    tty: true
+#    image: centos/mysql-57-centos7
+#    environment:
+#      TZ: Asia/Tokyo
+#      MYSQL_ROOT_PASSWORD: iQ994HNMrRBUN7p7
+#      MYSQL_USER: databaseuser
+#      MYSQL_PASSWORD: Tqjji8CnNaeSB7Ac
+#      MYSQL_DATABASE: laravel
+#    volumes:
+## envでできないならmy.cnfにする
+#      - ./mysql/my.cnf:/etc/my.cnf
+##    データ保存したいならディレクトリ決めてコメントアウトを外す
+#      - /host/db/path:/var/lib/mysql/data

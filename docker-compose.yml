@@ -25,8 +25,6 @@ services:
       - ./laravel/public:/var/www/laravel/public
       - ./laravel/resources:/var/www/laravel/resources
       - ./laravel/routes:/var/www/laravel/routes
-      - ./laravel/storage/app:/var/www/laravel/storage/app
-      - ./laravel/storage/framework:/var/www/laravel/storage/framework
       - ./laravel/tests:/var/www/laravel/tests
       - ./laravel/vendor:/var/www/laravel/vendor
       - ./laravel/.editorconfig:/var/www/laravel/.editorconfig

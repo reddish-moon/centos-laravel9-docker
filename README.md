@@ -20,8 +20,9 @@ windowsで書いて、VMはcentosで動かす
 
 ユーザーはVMで使うユーザーと同じにする
 
-Dockerfile内のuserをVMのユーザーに置き換える
+Dockerfileとentrypoinst.sh内のuserをVMのユーザーに置き換える
 
+Dockerfile
 ```Dockerfile
 4  RUN useradd -u 1000 user
 48 RUN echo 'user    ALL=(ALL)    NOPASSWD:ALL' >> /etc/sudoers.d/user
@@ -31,6 +32,7 @@ Dockerfile内のuserをVMのユーザーに置き換える
 85 RUN su - user -c "cd /var/www && export COMPOSER_PROCESS_TIMEOUT=1200;composer clear-cache && \
 ```
 
+entrypoinst.sh
 ```entrypoinst.sh
 4 su - user -c "cd /var/www/laravel &&
 ```

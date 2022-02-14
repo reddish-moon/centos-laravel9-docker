@@ -19,11 +19,20 @@ windowsで書いて、VMはcentosで動かす
 ほんとはalpineにしたいが…
 
 ユーザーはVMで使うユーザーと同じにする
-Dockerfile内のuserも適宜読み替える
 
-ここではuserで
+Dockerfile内のuserをVMのユーザーに置き換える
+
+```Dockerfile
+4  RUN useradd -u 1000 user
+48 RUN echo 'user    ALL=(ALL)    NOPASSWD:ALL' >> /etc/sudoers.d/user
+67 RUN usermod -a -G user apache
+80 RUN su - user -c "composer global require laravel/installer"
+81 RUN su - user -c "composer global require fruitcake/laravel-cors"
+85 RUN su - user -c "cd /var/www && export COMPOSER_PROCESS_TIMEOUT=1200;composer clear-cache && \
 ```
-useradd -u 1000 user
+
+```entrypoinst.sh
+4 su - user -c "cd /var/www/laravel &&
 ```
 
 ### 環境分けられるように
